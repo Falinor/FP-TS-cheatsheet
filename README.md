@@ -2,7 +2,7 @@
 
 This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
 
-## Piping functions
+## Combining functions
 
 ### Pipe
 Definition: transform an expression in a data-first pipeline of functions.
