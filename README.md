@@ -125,7 +125,7 @@ pipe(
   chain(isOldEnough)
 )
 ```
-You may use `Either.chainW` to _widen_ the error type. See [what is `W` in `chainW`](what-does-w-in-chainw-mean).
+You may use `Either.chainW` to [_widen_ the error type](#what-does-w-in-chainw-mean).
 
 ## Task
 Definition: an asynchronous computation that yields a value and **never fails**.
