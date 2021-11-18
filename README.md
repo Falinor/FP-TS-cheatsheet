@@ -7,11 +7,13 @@ This cheatsheet is intended for any reader to understand and remember fp-ts' mos
 The type `Either` represents an error or a value.
 ```ts
 interface Left<E> {
-  value: E
+  readonly _tag: 'Left'
+  readonly left: E
 }
 
 interface Right<A> {
-  value: A
+  readonly _tag: 'Right'
+  readonly right: A
 }
 
 type Either<E, A> = Left<E> | Right<A>
@@ -20,7 +22,7 @@ type Either<E, A> = Left<E> | Right<A>
 ### From a nullable value
 When your original value is nullable, you can use `Either.fromNullable`:
 ```ts
-import { fromNullable } from 'fp-ts/either'
+import { fromNullable } from 'fp-ts/Either'
 
 // Without type signature
 const mustExist = fromNullable(new CartMissingError())
@@ -32,7 +34,7 @@ const mustExist: (cart: Cart | null) => Either<CartMissingError, Cart> = fromNul
 ### Using a [predicate](#predicate)
 When you want to test whether a predicate is true and return an error if not, you can use `Either.fromPredicate`:
 ```ts
-import { fromPredicate } from 'fp-ts/either'
+import { fromPredicate } from 'fp-ts/Either'
 
 import { PropDifferentError } from '../errors'
 
@@ -45,7 +47,7 @@ const mustBeEqual: (obj: MyObject) => Either<PropDifferentError, MyObject> = fro
 ### Using a [refinement](#refinement)
 When you want to cast a value into another type, you can use the same function `Either.fromPredicate` with a refinement:
 ```ts
-import { fromPredicate } from 'fp-ts/either'
+import { fromPredicate } from 'fp-ts/Either'
 
 import { NotCartError } from '../errors'
 
