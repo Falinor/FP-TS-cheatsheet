@@ -2,7 +2,7 @@
 
 This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
 
-### Error or Value (Either)
+## Error or Value (Either)
 
 The type `Either` represents an error or a value.
 ```ts
