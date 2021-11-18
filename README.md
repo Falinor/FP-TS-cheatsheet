@@ -143,6 +143,9 @@ Definition: an asynchronous computation that **may fail**.
 // TODO
 ```
 
+### Useful functions
+
+
 ### What does `W` in `chainW` mean?
 `W` means a function is able to aggregate errors into a union (for Either based data types) or environments into an intersection (for Reader based data types).
 ```ts
