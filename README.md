@@ -2,6 +2,10 @@
 
 This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
 
+## Summary
+
+TODO: summary
+
 ## Combining functions
 
 ### Pipe
@@ -135,7 +139,15 @@ interface Task<A> {
 }
 ```
 
-// TODO: useful functions
+Task is often used when one destroys a TaskEither e.g.
+```ts
+await pipe(
+  useCase.execute(), // => TaskEither<E, A>
+  fold(
+    error => Task.of(error),
+    value => Task.of(value)
+  )
+)()
 
 ## TaskEither
 Definition: an asynchronous computation that **may fail**.
@@ -145,8 +157,28 @@ Definition: an asynchronous computation that **may fail**.
 
 ### Useful functions
 
+TODO
 
-### What does `W` in `chainW` mean?
+## Bind
+Definition: bind allows to store a read-only context value in the composition pipeline, so that it can be reused later.
+
+```ts
+pipe(
+  bind('user', fromThunk(userRepository.save)),
+  // Here is the ContextValue
+  ({ user }) => {
+    console.log(user)
+  }
+)
+
+// This is inferred by typescript
+interface ContextValue {
+  readonly user: User
+}
+```
+It forbids you to mutate the context value.
+
+## What does `W` in `chainW` mean?
 `W` means a function is able to aggregate errors into a union (for Either based data types) or environments into an intersection (for Reader based data types).
 ```ts
 import * as E from 'fp-ts/Either'
@@ -163,12 +195,15 @@ const program_ = (s: string) => pipe(s, TE.fromEitherK(parseString), TE.chain(fe
 const program = (s: string) => pipe(s, TE.fromEitherK(parseString), TE.chainW(fetchUser))
 ```
 
-### What does `K` in `fromNullableK` mean?
+## What does `K` in `fromNullableK` mean?
 ```ts
 // TODO
 ```
 
 ## Glossary
+
+### Context value
+The value that transits throughout a pipe. See [bind](#bind).
 
 ### Predicate
 A predicate is a function with the following signature:
