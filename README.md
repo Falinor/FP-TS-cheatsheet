@@ -228,9 +228,22 @@ const program = (s: string) => pipe(s, TE.fromEitherK(parseString), TE.chainW(fe
 ```
 
 ## What does `K` in `fromNullableK` mean?
+`K` in `fromNullableK` is used to do a `fromNullable` with a transformation (by a function) apply to the given agurments `<A>`
+And then return either `NonNullable<B>` or an error
+
 ```ts
-// TODO
+export declare const fromNullableK: <E>(
+  e: E
+) => <A extends readonly unknown[], B>(f: (...a: A) => B | null | undefined) => (...a: A) => Either<E, NonNullable<B>>
 ```
+
+
+`K` means Kleisli. A Kleisli arrow is a function with the following signature
+```ts
+(a: A) => F<B>
+```
+It's a sufix that we can find on other functions around the lib. ([more info on sufix](https://gcanti.github.io/fp-ts/guides/code-conventions.html))
+
 
 ## Glossary
 
