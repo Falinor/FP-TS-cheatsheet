@@ -42,9 +42,6 @@ pipe(
 )
 ```
 
-### Pipe {#custom-pipe}
-Test
-
 ### Flow
 Definition: like pipe but data-last.
 ```ts
