@@ -2,29 +2,9 @@
 
 This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
+## Summary
 
-- [Combining functions](#combining-functions)
-  - [Pipe](#pipe)
-  - [Flow](#flow)
-- [Either](#either)
-  - [From a nullable value](#from-a-nullable-value)
-  - [From a predicate](#from-a-predicate)
-  - [From a refinement](#from-a-refinement)
-  - [Useful functions](#useful-functions)
-- [Task](#task)
-  - [Useful functions](#useful-functions-1)
-- [Bind](#bind)
-- [What does `W` in `chainW` mean?](#what-does-w-in-chainw-mean)
-- [What does `K` in `fromNullableK` mean?](#what-does-k-in-fromnullablek-mean)
-- [Glossary](#glossary)
-  - [Context value](#context-value)
-  - [Predicate](#predicate)
-  - [Refinement](#refinement)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+TODO: summary
 
 ## Combining functions
 
@@ -53,6 +33,47 @@ flow(
 )(masters)
 ```
 
+## Common constructors
+
+For all the monads that can fail below, these constructors exists
+
+### From a nullable value
+```ts
+import { fromNullable } from 'fp-ts/Either'
+
+// Without type signature
+const mustExist = fromNullable(new CartMissingError())
+
+// With explicit type signature
+const mustExist: (cart: Cart | null) => Either<CartMissingError, Cart> = fromNullable(new CartMissingError())
+```
+
+### Using a [predicate](#predicate)
+Test whether a predicate is true and return an error if not.
+```ts
+import { fromPredicate } from 'fp-ts/Either'
+
+import { PropDifferentError } from '../errors'
+
+const mustBeEqual: (obj: MyObject) => Either<PropDifferentError, MyObject> = fromPredicate(
+  obj => obj.prop === 'value',
+  obj => new PropDifferentError(obj.prop, 'value')
+)
+```
+
+### Using a [refinement](#refinement)
+Like a predicate but casts the given value into another type.
+```ts
+import { fromPredicate } from 'fp-ts/Either'
+
+import { NotCartError } from '../errors'
+
+const mustBeCart: (cartOrList: Cart | List) => Either<NotCartError, cartOrList is Cart> = fromPredicate(
+  cartOrList => cartOrList.type === 'cart',
+  cartOrList => new NotCartError()
+)
+```
+
 ## Either
 Definition: an error (left) or a value (right).
 ```ts
@@ -67,43 +88,6 @@ interface Right<A> {
 }
 
 type Either<E, A> = Left<E> | Right<A>
-```
-
-### From a nullable value
-```ts
-import { fromNullable } from 'fp-ts/Either'
-
-// Without type signature
-const mustExist = fromNullable(new CartMissingError())
-
-// With explicit type signature
-const mustExist: (cart: Cart | null) => Either<CartMissingError, Cart> = fromNullable(new CartMissingError())
-```
-
-### From a [predicate](#predicate)
-Test whether a predicate is true and return an error if not.
-```ts
-import { fromPredicate } from 'fp-ts/Either'
-
-import { PropDifferentError } from '../errors'
-
-const mustBeEqual: (obj: MyObject) => Either<PropDifferentError, MyObject> = fromPredicate(
-  obj => obj.prop === 'value',
-  obj => new PropDifferentError(obj.prop, 'value')
-)
-```
-
-### From a [refinement](#refinement)
-Like a predicate but casts the given value into another type.
-```ts
-import { fromPredicate } from 'fp-ts/Either'
-
-import { NotCartError } from '../errors'
-
-const mustBeCart: (cartOrList: Cart | List) => Either<NotCartError, cartOrList is Cart> = fromPredicate(
-  cartOrList => cartOrList.type === 'cart',
-  cartOrList => new NotCartError()
-)
 ```
 
 ### Useful functions
@@ -168,11 +152,11 @@ await pipe(
     value => Task.of(value)
   )
 )()
-
+```
 ## TaskEither
-Definition: an asynchronous computation that **may fail**.
+Definition: an asynchronous computation that **either yields a value** of type A or **fails, yielding an error** of type E
 ```ts
-// TODO
+interface TaskEither<E, A> extends Task<Either<E, A>> {}
 ```
 
 ### Useful functions
