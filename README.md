@@ -1,3 +1,7 @@
+# fp-ts cheatsheet
+
+This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
@@ -26,14 +30,6 @@
     - [Refinement](#refinement)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# fp-ts cheatsheet
-
-This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
-
-## Summary
-
-TODO: summary
 
 ## Combining functions
 
