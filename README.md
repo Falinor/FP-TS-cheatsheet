@@ -8,7 +8,6 @@ This cheatsheet is intended for any reader to understand and remember fp-ts' mos
 
 - [Combining functions](#combining-functions)
   - [Pipe](#pipe)
-  - [Pipe {&#035;custom-pipe}](#pipe-custom-pipe)
   - [Flow](#flow)
 - [Either](#either)
   - [From a nullable value](#from-a-nullable-value)
