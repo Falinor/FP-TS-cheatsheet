@@ -181,6 +181,17 @@ await pipe(
   )
 )()
 ```
+### Useful functions
+
+delay(millis: number) : Creates a task that will complete after a time delay.
+```ts
+  pipe(
+      T.chain(() => doSomething()),
+      T.chain(() => delay(1000)),
+      T.map(() => 'done after 1000ms')
+  )
+```
+
 ## TaskEither
 Definition: an asynchronous computation that **either yields a value** of type A or **fails, yielding an error** of type E
 ```ts
