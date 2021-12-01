@@ -7,12 +7,14 @@
   - [Combining functions](#combining-functions)
     - [Pipe](#pipe)
     - [Flow](#flow)
-  - [Either](#either)
+  - [Common constructors](#common-constructors)
     - [From a nullable value](#from-a-nullable-value)
     - [Using a predicate](#using-a-predicate)
     - [Using a refinement](#using-a-refinement)
+  - [Either](#either)
     - [Useful functions](#useful-functions)
   - [Task](#task)
+  - [TaskEither](#taskeither)
     - [Useful functions](#useful-functions-1)
   - [Bind](#bind)
   - [What does `W` in `chainW` mean?](#what-does-w-in-chainw-mean)
@@ -59,21 +61,9 @@ flow(
 )(masters)
 ```
 
-## Either
-Definition: an error (left) or a value (right).
-```ts
-interface Left<E> {
-  readonly _tag: 'Left'
-  readonly left: E
-}
+## Common constructors
 
-interface Right<A> {
-  readonly _tag: 'Right'
-  readonly right: A
-}
-
-type Either<E, A> = Left<E> | Right<A>
-```
+For all the monads that can fail below, these constructors exists
 
 ### From a nullable value
 ```ts
@@ -110,6 +100,22 @@ const mustBeCart: (cartOrList: Cart | List) => Either<NotCartError, cartOrList i
   cartOrList => cartOrList.type === 'cart',
   cartOrList => new NotCartError()
 )
+```
+
+## Either
+Definition: an error (left) or a value (right).
+```ts
+interface Left<E> {
+  readonly _tag: 'Left'
+  readonly left: E
+}
+
+interface Right<A> {
+  readonly _tag: 'Right'
+  readonly right: A
+}
+
+type Either<E, A> = Left<E> | Right<A>
 ```
 
 ### Useful functions
@@ -174,11 +180,11 @@ await pipe(
     value => Task.of(value)
   )
 )()
-
+```
 ## TaskEither
-Definition: an asynchronous computation that **may fail**.
+Definition: an asynchronous computation that **either yields a value** of type A or **fails, yielding an error** of type E
 ```ts
-// TODO
+interface TaskEither<E, A> extends Task<Either<E, A>> {}
 ```
 
 ### Useful functions
