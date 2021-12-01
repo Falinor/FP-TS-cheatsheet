@@ -148,6 +148,29 @@ await pipe(
     value => Task.of(value)
   )
 )()
+```
+
+### Useful functions
+
+delay(millis: number) : Creates a task that will complete after a time delay.
+```ts
+import { sequenceT } from 'fp-ts/Apply'
+  import * as T from 'fp-ts/Task'
+ 
+  async function test() {
+    const log: Array<string> = []
+    const append = (message: string): T.Task<void> =>
+      T.fromIO(() => {
+        log.push(message)
+      })
+    const fa = append('a')
+    const fb = append('b')
+    const fc = T.delay(10)(append('c'))
+    const fd = append('d')
+    await sequenceT(T.ApplyPar)(fa, fb, fc, fd)()
+    assert.deepStrictEqual(log, ['a', 'b', 'd', 'c'])
+ }
+```
 
 ## TaskEither
 Definition: an asynchronous computation that **may fail**.
@@ -155,9 +178,6 @@ Definition: an asynchronous computation that **may fail**.
 // TODO
 ```
 
-### Useful functions
-
-TODO
 
 ## Bind
 Definition: bind allows to store a read-only context value in the composition pipeline, so that it can be reused later.
