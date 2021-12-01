@@ -29,7 +29,7 @@ pipe(
 )
 ```
 
-### Pipe
+### Pipe {#custom-pipe}
 Test
 
 ### Flow
