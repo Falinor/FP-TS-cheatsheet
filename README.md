@@ -14,8 +14,9 @@
   - [Either](#either)
     - [Useful functions](#useful-functions)
   - [Task](#task)
-  - [TaskEither](#taskeither)
     - [Useful functions](#useful-functions-1)
+  - [TaskEither](#taskeither)
+    - [Useful functions](#useful-functions-2)
   - [Bind](#bind)
   - [What does `W` in `chainW` mean?](#what-does-w-in-chainw-mean)
   - [What does `K` in `fromNullableK` mean?](#what-does-k-in-fromnullablek-mean)
@@ -181,6 +182,17 @@ await pipe(
   )
 )()
 ```
+### Useful functions
+
+delay(millis: number) : Creates a task that will complete after a time delay.
+```ts
+  pipe(
+      T.chain(() => doSomething()),
+      T.chain(() => delay(1000)),
+      T.map(() => 'done after 1000ms')
+  )
+```
+
 ## TaskEither
 Definition: an asynchronous computation that **either yields a value** of type A or **fails, yielding an error** of type E
 ```ts
