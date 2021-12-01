@@ -1,3 +1,31 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [fp-ts cheatsheet](#fp-ts-cheatsheet)
+  - [Summary](#summary)
+  - [Combining functions](#combining-functions)
+    - [Pipe](#pipe)
+    - [Flow](#flow)
+  - [Common constructors](#common-constructors)
+    - [From a nullable value](#from-a-nullable-value)
+    - [Using a predicate](#using-a-predicate)
+    - [Using a refinement](#using-a-refinement)
+  - [Either](#either)
+    - [Useful functions](#useful-functions)
+  - [Task](#task)
+  - [TaskEither](#taskeither)
+    - [Useful functions](#useful-functions-1)
+  - [Bind](#bind)
+  - [What does `W` in `chainW` mean?](#what-does-w-in-chainw-mean)
+  - [What does `K` in `fromNullableK` mean?](#what-does-k-in-fromnullablek-mean)
+  - [Glossary](#glossary)
+    - [Context value](#context-value)
+    - [Predicate](#predicate)
+    - [Refinement](#refinement)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # fp-ts cheatsheet
 
 This cheatsheet is intended for any reader to understand and remember fp-ts' most used features.
