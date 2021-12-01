@@ -4,7 +4,15 @@ This cheatsheet is intended for any reader to understand and remember fp-ts' mos
 
 ## Summary
 
-TODO: summary
+- [Combining functions](#combining-functions)
+  - [pipe](#pipe)
+  - [flow](#flow)
+- [Either](#either)
+  - [from a nullable value](#from-a-nullable-value)
+  - [from a predicate](#from-predicate)
+  - [from a refinement](#from-refinement)
+  - [useful functions](#useful-functions)
+
 
 ## Combining functions
 
@@ -20,6 +28,9 @@ pipe(
   filter(length => length > 4)
 )
 ```
+
+### Pipe
+Test
 
 ### Flow
 Definition: like pipe but data-last.
@@ -60,7 +71,7 @@ const mustExist = fromNullable(new CartMissingError())
 const mustExist: (cart: Cart | null) => Either<CartMissingError, Cart> = fromNullable(new CartMissingError())
 ```
 
-### Using a [predicate](#predicate)
+### From a [predicate](#predicate)
 Test whether a predicate is true and return an error if not.
 ```ts
 import { fromPredicate } from 'fp-ts/Either'
@@ -73,7 +84,7 @@ const mustBeEqual: (obj: MyObject) => Either<PropDifferentError, MyObject> = fro
 )
 ```
 
-### Using a [refinement](#refinement)
+### From a [refinement](#refinement)
 Like a predicate but casts the given value into another type.
 ```ts
 import { fromPredicate } from 'fp-ts/Either'
